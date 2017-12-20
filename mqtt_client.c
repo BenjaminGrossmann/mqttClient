@@ -5,15 +5,17 @@
 #include "string.h"
 #include "MQTTClient.h"
 
-#define ADDRESS     "http://test.mosquitto.org/gauge/"
+#define ADDRESS     "test.mosquitto.org"
 #define CLIENTID    "ExampleClientPub"
 #define TOPIC       "temp/random"
-#define PAYLOAD     "23"
 #define QOS         1
 #define TIMEOUT     10000L
 
 int main(int argc, char* argv[])
 {
+char* PAYLOAD;
+PAYLOAD = (char *) malloc(strlen(argv[1])+1);
+strcpy(PAYLOAD,argv[1]);
     MQTTClient client;
     MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
     MQTTClient_message pubmsg = MQTTClient_message_initializer;
